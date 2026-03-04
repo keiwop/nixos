@@ -1,7 +1,7 @@
 
 ################################################################################
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (C): 2013 - 2025 - keiwop <keiwop.dev@gmail.com>
+# Copyright (C): 2013 - 2026 - keiwop <keiwop.dev@gmail.com>
 ################################################################################
 
 
@@ -275,6 +275,9 @@ alias update_weather="wget --directory-prefix=/tmp https://celestrak.org/NORAD/e
 alias dkrp="docker compose pull"
 alias dkru="docker compose up -d"
 alias dkrl="docker logs -f"
+
+alias kernel_is_set="zcat /proc/config.gz | grep CONFIG_LOGO"
+
 # alias esprun=""
 # Clean orphaned shortcuts
 # alias kde_clean_shortcuts="qdbus org.kde.kglobalaccel /component/kwin org.kde.kglobalaccel.Component.cleanUp"
@@ -502,7 +505,7 @@ update_prompt(){
 # If no args are given, then it auto-connects to the "main" session
 screen(){
     # Pass arguments to the real screen program
-    if [[ $# -gt 0 ]]; then
+    if [ $# -gt 0 ]; then
         command screen "$@"
         return
     fi
@@ -519,6 +522,22 @@ screen(){
     fi
     echo "Creating main screen session"
     command screen -S main
+}
+
+# Same as the screen builtin
+tmux(){
+    if [ $# -gt 0 ]; then
+        echo "Using real tmux"
+        command tmux "$@"
+        return
+    fi
+
+    echo "Attaching or creating tmux session: main"
+    # A: Attach to session (create if it doesn't exists)
+    # D: Detach all other clients (In -A mode of new-session, -d of attach-session becomes -D)
+    # X: Send SIGHUP to detached clients parent (In -A mode of new-session, -x of attach-session becomes -X)
+    # s: Session name
+    command tmux new-session -A -D -X -s main
 }
 
 
@@ -741,7 +760,7 @@ esprun(){
         echo "Usage: esprun config_file [ip_address/tty_path]"
         exit 1
     fi
-    docker exec -it esphome bash -c "rm -rf /config/{*.yaml,bkp,c,common,components}"
+    docker exec -it esphome bash -c "rm -rf /config/{*.yaml,bkp,common,components,devices,ext_components,ui}"
     docker exec -it esphome bash -c "cp -a /src/* /config/"
 
     if [[ -z $2 ]]; then
