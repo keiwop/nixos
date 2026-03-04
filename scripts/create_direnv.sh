@@ -60,7 +60,7 @@ case "$1" in
 esac
 
 
-echo "🔎 Searching for a nix shell"
+echo "Searching for a nix shell"
 nix_file=""
 
 if [ -f "$1" ]; then
@@ -96,7 +96,7 @@ if [ -z "$nix_file" ] || ! [ -f "$nix_file" ]; then
 fi
 
 
-echo -e "\n✅ Found shell: $nix_file"
+echo -e "\nFound shell: $nix_file"
 
 echo "   • Creating .envrc file"
 echo "use nix" > .envrc
@@ -107,5 +107,5 @@ cp "$nix_file" "./$TARGET_NIX_FILE"
 echo '   • Running "direnv allow"'
 direnv allow
 
-echo -e "\n🎉 Development shell successfully created!"
+echo -e "\nDevelopment shell successfully created!"
 echo -e "\n--------------------------------------------------------------------------------\n"

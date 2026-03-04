@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (C): 2025 - keiwop <keiwop.dev@gmail.com>
+# Copyright (C): 2025 - 2026 - keiwop <keiwop.dev@gmail.com>
 
 { apps }:
 
@@ -36,17 +36,34 @@ in
 
       ++[
       apps.custom.termm
+      apps.custom.kwin_focus_app
       apps.custom.minichlink
       apps.custom.riscv32ec_toolchain
       apps.custom.jellyfin_desktop
 
       siril
+      zed-editor
     ];
+
+    environment.sessionVariables = {
+      KICAD9_SYMBOL_DIR = "/_/fun/kicad/symbols";
+      KICAD9_FOOTPRINT_DIR = "/_/fun/kicad/footprints";
+      KICAD9_3DMODEL_DIR = "/_/fun/kicad/3dmodels";
+      KICAD9_3RD_PARTY = "/_/fun/kicad/3rdparty";
+      KICAD9_TEMPLATE_DIR = "/_/fun/kicad/template";
+      KICAD_USER_TEMPLATE_DIR = "/_/fun/kicad/template_user";
+    };
 
 
     #############################################################################
     ### Services ################################################################
     #############################################################################
+
+    services.kmscon = {
+      enable = true;
+      useXkbConfig = true;
+      autologinUser = "keiwop";
+    };
 
     services.displayManager.defaultSession = "plasmax11";
 
@@ -104,7 +121,7 @@ in
     ### HW Specific #############################################################
     #############################################################################
 
-    # Bodge to get the battery estimation working
+    # Bodge to get the battery estimation working again after suspend
     systemd.services."fix-battery-module" = {
       enable = true;
       description = "Reloads the battery module after suspend";
@@ -123,6 +140,6 @@ in
     };
 
     # Don't touch unless you go read about it
-    system.stateVersion = "25.05";
+    system.stateVersion = "25.11";
   };
 }

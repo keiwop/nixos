@@ -1,10 +1,10 @@
 #! /bin/sh
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (C): 2025 - keiwop <keiwop.dev@gmail.com>
+# Copyright (C): 2025 - 2026 - keiwop <keiwop.dev@gmail.com>
 
 
 USER_NAME=keiwop
-HOST_NAME=nix-ebook2
+HOST_NAME=nix-test
 
 NIXOS_PATH=/_/etc/nixos
 NIX_DIR=$NIXOS_PATH/nix
@@ -98,7 +98,7 @@ generate_secrets(){
         echo "Syncthing certificate found in $SYNC. Skipping certificate generation"
     else
         mkdir -p $SYNC
-        nix-shell -p syncthing --run "syncthing generate --config $SYNC"
+        nix-shell -p syncthing --run "syncthing generate --home $SYNC"
         rm $SYNC/.syncthing.tmp.* $SYNC/config.xml
     fi
 
@@ -150,7 +150,6 @@ link_nix_configuration(){
         fi
         exit 1
     fi
-    echo " ✅"
 }
 
 
@@ -187,7 +186,7 @@ link_nix_configuration
 link_dotfiles
 
 
-echo "🎉 Installation done"
+echo "Installation done!"
 echo "Don't forget to modify $HOST_NAME.nix from $NIX_DIR/machines/"
 echo "If you're using syncthing, add the IDs to $HOST_NAME/secrets.nix and configure $HOST_NAME/syncthing/syncthing.nix"
 echo "Then run sudo nixos-rebuild switch"

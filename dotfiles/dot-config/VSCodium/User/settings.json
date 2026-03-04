@@ -48,5 +48,7 @@
             "bold": true,
         }
     ],
-    "workbench.iconTheme": "material-icon-theme"
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.activityBar.location": "top",
+    "explorer.sortOrder": "default"
 }

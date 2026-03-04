@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (C): 2025 - keiwop <keiwop.dev@gmail.com>
+# Copyright (C): 2025 - 2026 - keiwop <keiwop.dev@gmail.com>
 
 # Define some macros for use in the screenrc
 backtick 0 0 0 whoami
@@ -74,11 +74,11 @@ defmousetrack on
 # Allow terminal scrollback
 termcapinfo xterm* ti@:te@
 
-# Exiting from editors restore the display
-altscreen on
+# Exiting from editors restores the display
+altscreen off
 
 # Don't wait for a timed out display (ie: ssh disconnection)
-nonblock on 
+nonblock on
 defnonblock on
 
 # Define the maximum scrollback lines
@@ -104,8 +104,8 @@ chdir /_/dev
 screen -t "/_/dev" 2
 chdir /_/src
 screen -t "/_/src" 3
-chdir /_/etc/nixos
-screen -t "/_/etc/nixos" 4
+chdir /_/etc
+screen -t "/_/etc" 4
 
 # Select the first window by default
 # select 0

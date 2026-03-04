@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (C): 2025 - keiwop <keiwop.dev@gmail.com>
+# Copyright (C): 2025 - 2026 - keiwop <keiwop.dev@gmail.com>
 
 { pkgs ? import <nixpkgs> {} }:
 
@@ -17,11 +17,19 @@ with pkgs; [
   kicad-small
   gimp3
   inkscape
+  gnome-disk-utility
+
+  # Utilities
+  xsel
+  wl-clipboard
 
   # KDE
   kdePackages.kconfig
   kdotool
   kdePackages.kde-gtk-config
+  kdePackages.kaccounts-integration
+  kdePackages.kaccounts-providers
+  kdePackages.signond
 
   # Hyprland
   wofi
