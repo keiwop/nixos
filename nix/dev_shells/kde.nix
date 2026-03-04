@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-# Copyright (C): 2025 - keiwop <keiwop.dev@gmail.com>
+# Copyright (C): 2025 - 2026 - keiwop <keiwop.dev@gmail.com>
 
 { pkgs ? import <nixpkgs> {} }:
 
@@ -72,7 +72,8 @@ pkgs.mkShell {
     export PATH="$ENV_SCRIPTS_DIR:$PATH"
 
     echo ""
-    echo "Dev shell for $(pwd) -> 🖥️"
+    chafa --symbols block --grid 1x1 --size 48x16 /_/etc/nixos/nix/dev_shells/img/kde_logo.png
+    echo "Dev shell for $(pwd)"
     echo "   • Environment: KDE/Plasma"
     echo "   • Commands: kde_clean_shortcuts, kde_read_shortcut, kde_log_scripts, kde_list_scripts, kde_install_script, kde_enable_script, kde_disable_script, kde_reload_script"
     echo "   • Scripts created in: $ENV_SCRIPTS_DIR"
